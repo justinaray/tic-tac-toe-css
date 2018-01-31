@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tic-Tac-Toe with CSS</title>
+
+        <style>
+            html, body {
+                margin: 0px;
+                padding: 0px;
+            }
+            :root {
+                --gameboard-bg-color: #FF0000;
+                --gameboard-fg-color: #FFFFFF;
+                --player-one-color: #000000;
+                --player-two-color: #000000;
+            }
+
+            /* Common, base Styling - override if needed */
+            .sr-only {
+                display: none;
+            }
+
+            .gameboard {
+                background-color: var(--gameboard-bg-color);
+            }
+
+            .square {
+                background-color: var(--gameboard-fg-color);
+            }
+
+            .square::before {
+                display: inline-block;
+                width: 100%;
+                height: 100%;
+                font-size: 50px;
+                line-height: 1;
+                text-align: center;
+            }
+
+            .square.player-one::before {
+                content: 'X';
+                color: var(--player-one-color);
+            }
+            .square.player-two::before {
+                content: 'O';
+                color: var(--player-two-color);
+            }
+            /* End Common, base Styling */
+
+            /* Grid Layout */
+
+            .grid-layout .gameboard {
+                display: inline-grid;
+                grid-template-columns: repeat(3, 50px);
+                grid-column-gap: 10px;
+                grid-template-rows: repeat(3, 50px);
+                grid-row-gap: 10px;
+            }
+
+            /* End Grid Layout */
+
+            /* Flexbox Layout */
+
+            .flexbox-layout .gameboard {
+                width: 170px;
+                height: 170px;
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                align-items: stretch;
+                align-content: space-between;
+            }
+            .flexbox-layout .square {
+                width: 30%;
+                height: 30%;
+                flex: 0 0 auto;
+            }
+            /* End Flexbox Layout */
+
+            /* Traditional Layout */
+            .clearfix::after {
+                display: block;
+                content: "";
+                clear: both;
+            }
+
+            .traditional-layout .gameboard {
+                display: inline-block;
+            }
+
+            .traditional-layout .row {
+                clear: both;
+            }
+
+            .traditional-layout .square {
+                margin: 10px 0 0 10px;
+                float: left;
+                width: 50px;
+                height: 50px;
+            }
+
+            .traditional-layout .gameboard .row:first-child .square {
+                margin-top: 0px;
+            }
+
+            .traditional-layout .gameboard .row .square:first-child {
+                margin-left: 0px;
+            }
+            /* End Traditional Layout */
+
+            /* Page Layout */
+            .config {
+                position: absolute;
+                right: 2em;
+            }
+
+            .config button {
+                display: block;
+                margin: 0 auto 1em;
+            }
+
+            .config form {
+                display: grid;
+                grid-template-columns: 2fr 1fr;
+                grid-column-gap: 1em;
+                grid-row-gap: .5em;
+                justify-items: start;
+                align-items: center;
+            }
+
+            .config label {
+                display: block;
+            }
+            /* End Page Layout */
+        </style>
+    </head>
+    <body>
+        <h1>Tic-Tac-Toe Boards and CSS Layout Techniques</h1>
+        <p>
+            To keep this simple and a comparison of techniques, I have not made these layouts
+            responsive.  This is certainly to the detriment of these techniques as they are ripe for
+            responsive layouts.  A real-world layout would certainly allow for resizing.
+        </p>
+
+        <h2>Also, CSS Variables!</h2>
+        <p>The color config utilizes CSS variables and allows dynamically changing said values</p>
+
+        <h2>"Gameplay"</h2>
+        <p>
+            The point of this page is to demonstate CSS layouts and techniques.  As such, it's not
+            a full-featured game.  That said, you can play a bit.
+        </p>
+        <ul>
+            <li>Click in a square to place the current player's marker</li>
+            <li>You can undo your move until the other player moves</li>
+            <li>Click New Game to clear the boards</li>
+        </ul>
+
+        <section class="config">
+            <h1 class="sr-only">Controls</h1>
+            <button id="undo">Undo Last Move</button>
+            <button id="newGame">New Game</button>
+
+            <h1>Options</h1>
+            <form>
+                <label for="gameboard-bg-color">Board Grid:</label>
+                <input type="color" id="gameboard-bg-color" name="boardBgColor">
+                <label for="gameboard-bg-color">Board Squares:</label>
+                <input type="color" id="gameboard-fg-color" name="boardFgColor">
+                <label for="gameboard-bg-color">Player One:</label>
+                <input type="color" id="player-one-color" name="playerOneColor">
+                <label for="gameboard-bg-color">Player Two:</label>
+                <input type="color" id="player-two-color" name="playerTwoColor">
+            </form>
+        </section>
+        <section class="layouts">
+            <h1>CSS Layouts</h1>
+            <section class="grid-layout">
+                <h1>CSS Grid Layout</h1>
+                <div class="gameboard">
+                    <div class="square square-0-0"></div>
+                    <div class="square square-0-1"></div>
+                    <div class="square square-0-2"></div>
+                    <div class="square square-1-0"></div>
+                    <div class="square square-1-1"></div>
+                    <div class="square square-1-2"></div>
+                    <div class="square square-2-0"></div>
+                    <div class="square square-2-1"></div>
+                    <div class="square square-2-2"></div>
+                </div>
+            </section>
+            <section class="flexbox-layout">
+                <h1>Flexbox Layout</h1>
+                <div class="gameboard">
+                    <div class="square square-0-0"></div>
+                    <div class="square square-0-1"></div>
+                    <div class="square square-0-2"></div>
+                    <div class="square square-1-0"></div>
+                    <div class="square square-1-1"></div>
+                    <div class="square square-1-2"></div>
+                    <div class="square square-2-0"></div>
+                    <div class="square square-2-1"></div>
+                    <div class="square square-2-2"></div>
+                </div>
+            </section>
+            <section class="traditional-layout">
+                <h1>Traditional CSS and Floats</h1>
+                <div class="gameboard">
+                    <div class="row row-0">
+                        <div class="square square-0-0"></div>
+                        <div class="square square-0-1"></div>
+                        <div class="square square-0-2"></div>
+                    </div>
+                    <div class="row row-1">
+                        <div class="square square-1-0"></div>
+                        <div class="square square-1-1"></div>
+                        <div class="square square-1-2"></div>
+                    </div>
+                    <div class="row row-2">
+                        <div class="square square-2-0"></div>
+                        <div class="square square-2-1"></div>
+                        <div class="square square-2-2"></div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </section>
+        </section>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // ----- Options -----
+
+                // Color Controls
+                let docEl = document.documentElement;
+                let docStyle = getComputedStyle(docEl);
+
+                const HEX_COLOR_REG_EXP = /^#([a-f]|\d){6}$/i;
+                function handleColorUpdate() {
+                    let proposedColor = this.value.trim();
+
+                    if (HEX_COLOR_REG_EXP.test(proposedColor)) {
+                        docEl.style.setProperty(`--${this.id}`, proposedColor);
+                    }
+                }
+
+                document.querySelectorAll('.config input[type="color"]').forEach(currColorInput => {
+                    let currId = currColorInput.id;
+                    let currColor = docStyle.getPropertyValue(`--${currId}`).trim();
+                    currColorInput.value = currColor;
+
+                    currColorInput.addEventListener('input', handleColorUpdate);
+                    currColorInput.addEventListener('change', handleColorUpdate);
+                });
+
+                // ----- "Gameplay" -----
+                // Add some basic tic-tac-toe functionality; just to play around
+                let readyPlayerOne = true; // Get it?
+                let lastPlayedSquare = null;
+
+                document.querySelector('button#newGame').addEventListener('click', () => {
+                    readyPlayerOne = true;
+                    Array.from(document.querySelectorAll('.gameboard .square')).forEach(squareEl => {
+                        squareEl.classList.remove(...['player-one', 'player-two']);
+                    })
+                });
+
+                document.querySelector('button#undo').addEventListener('click', () => {
+                    if (lastPlayedSquare === null) {
+                        return;
+                    }
+
+                    let matchingSquares = Array.from(document.querySelectorAll(`.gameboard .${lastPlayedSquare}`));
+                    matchingSquares.forEach(currSquareEl => {
+                        currSquareEl.classList.remove('player-one');
+                        currSquareEl.classList.remove('player-two');
+                    });
+
+                    readyPlayerOne = !readyPlayerOne; 
+                    lastPlayedSquare = null;
+                });
+
+                document.querySelectorAll('.square').forEach(curr => {
+                    curr.addEventListener('click', evt => {
+                        if (evt.target.classList.contains('player-one') ||
+                            evt.target.classList.contains('player-two')) {
+                                return;
+                        }
+
+                        let squareClass = null;
+                        let classIterator = evt.target.classList.entries();
+                        for ([,currClass] of classIterator) {
+                            let toCheck = currClass.trim();
+                            if (/^square-\d-\d$/.test(toCheck)) {
+                                squareClass = toCheck;
+                            }
+                        }
+
+                        if (squareClass) {
+                            let matchingSquares = Array.from(document.querySelectorAll(`.gameboard .${squareClass}`));
+                            matchingSquares.forEach(currSquareEl => {
+                                currSquareEl.classList.add(readyPlayerOne ? 'player-one' : 'player-two');
+                            });
+                            lastPlayedSquare = squareClass;
+
+                            readyPlayerOne = !readyPlayerOne; 
+                        }
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>
