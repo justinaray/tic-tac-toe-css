@@ -110,9 +110,26 @@
             /* End Traditional Layout */
 
             /* Page Layout */
+            main {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .layouts {
+                flex: 1 1 auto;
+                display: flex;
+                justify-content: space-around;
+                align-items: stretch;
+                flex-wrap: wrap;
+            }
+
+            .layouts section {
+                text-align: center;
+            }
+
             .config {
-                position: absolute;
-                right: 2em;
+                flex: 0 2 auto;
+                margin-right: 20px;
             }
 
             .config button {
@@ -136,96 +153,98 @@
         </style>
     </head>
     <body>
-        <h1>Tic-Tac-Toe Boards and CSS Layout Techniques</h1>
-        <p>
-            To keep this simple and a comparison of techniques, I have not made these layouts
-            responsive.  This is certainly to the detriment of these techniques as they are ripe for
-            responsive layouts.  A real-world layout would certainly allow for resizing.
-        </p>
+        <header>
+            <h1>Tic-Tac-Toe Boards and CSS Layout Techniques</h1>
+            <p>
+                To keep this simple and a comparison of techniques, I have not made these layouts
+                responsive.  This is certainly to the detriment of these techniques as they are ripe for
+                responsive layouts.  A real-world layout would certainly allow for resizing.
+            </p>
 
-        <h2>Also, CSS Variables!</h2>
-        <p>The color config utilizes CSS variables and allows dynamically changing said values</p>
+            <h2>Also, CSS Variables!</h2>
+            <p>The color config utilizes CSS variables and allows dynamically changing said values</p>
 
-        <h2>"Gameplay"</h2>
-        <p>
-            The point of this page is to demonstate CSS layouts and techniques.  As such, it's not
-            a full-featured game.  That said, you can play a bit.
-        </p>
-        <ul>
-            <li>Click in a square to place the current player's marker</li>
-            <li>You can undo your move until the other player moves</li>
-            <li>Click New Game to clear the boards</li>
-        </ul>
-
-        <section class="config">
-            <h1 class="sr-only">Controls</h1>
-            <button id="undo">Undo Last Move</button>
-            <button id="newGame">New Game</button>
-
-            <h1>Options</h1>
-            <form>
-                <label for="gameboard-bg-color">Board Grid:</label>
-                <input type="color" id="gameboard-bg-color" name="boardBgColor">
-                <label for="gameboard-bg-color">Board Squares:</label>
-                <input type="color" id="gameboard-fg-color" name="boardFgColor">
-                <label for="gameboard-bg-color">Player One:</label>
-                <input type="color" id="player-one-color" name="playerOneColor">
-                <label for="gameboard-bg-color">Player Two:</label>
-                <input type="color" id="player-two-color" name="playerTwoColor">
-            </form>
-        </section>
-        <section class="layouts">
-            <h1>CSS Layouts</h1>
-            <section class="grid-layout">
-                <h1>CSS Grid Layout</h1>
-                <div class="gameboard">
-                    <div class="square square-0-0"></div>
-                    <div class="square square-0-1"></div>
-                    <div class="square square-0-2"></div>
-                    <div class="square square-1-0"></div>
-                    <div class="square square-1-1"></div>
-                    <div class="square square-1-2"></div>
-                    <div class="square square-2-0"></div>
-                    <div class="square square-2-1"></div>
-                    <div class="square square-2-2"></div>
-                </div>
-            </section>
-            <section class="flexbox-layout">
-                <h1>Flexbox Layout</h1>
-                <div class="gameboard">
-                    <div class="square square-0-0"></div>
-                    <div class="square square-0-1"></div>
-                    <div class="square square-0-2"></div>
-                    <div class="square square-1-0"></div>
-                    <div class="square square-1-1"></div>
-                    <div class="square square-1-2"></div>
-                    <div class="square square-2-0"></div>
-                    <div class="square square-2-1"></div>
-                    <div class="square square-2-2"></div>
-                </div>
-            </section>
-            <section class="traditional-layout">
-                <h1>Traditional CSS and Floats</h1>
-                <div class="gameboard">
-                    <div class="row row-0">
+            <h2>"Gameplay"</h2>
+            <p>
+                The point of this page is to demonstate CSS layouts and techniques.  As such, it's not
+                a full-featured game.  That said, you can play a bit.
+            </p>
+            <ul>
+                <li>Click in a square to place the current player's marker</li>
+                <li>You can undo your move until the other player moves</li>
+                <li>Click New Game to clear the boards</li>
+            </ul>
+        </header>
+        <main>
+            <section class="layouts">
+                <section class="grid-layout">
+                    <h2>CSS Grid Layout</h2>
+                    <div class="gameboard">
                         <div class="square square-0-0"></div>
                         <div class="square square-0-1"></div>
                         <div class="square square-0-2"></div>
-                    </div>
-                    <div class="row row-1">
                         <div class="square square-1-0"></div>
                         <div class="square square-1-1"></div>
                         <div class="square square-1-2"></div>
-                    </div>
-                    <div class="row row-2">
                         <div class="square square-2-0"></div>
                         <div class="square square-2-1"></div>
                         <div class="square square-2-2"></div>
                     </div>
-                    <div class="clearfix"></div>
-                </div>
+                </section>
+                <section class="flexbox-layout">
+                    <h2>Flexbox Layout</h2>
+                    <div class="gameboard">
+                        <div class="square square-0-0"></div>
+                        <div class="square square-0-1"></div>
+                        <div class="square square-0-2"></div>
+                        <div class="square square-1-0"></div>
+                        <div class="square square-1-1"></div>
+                        <div class="square square-1-2"></div>
+                        <div class="square square-2-0"></div>
+                        <div class="square square-2-1"></div>
+                        <div class="square square-2-2"></div>
+                    </div>
+                </section>
+                <section class="traditional-layout">
+                    <h2>Traditional CSS and Floats</h2>
+                    <div class="gameboard">
+                        <div class="row row-0">
+                            <div class="square square-0-0"></div>
+                            <div class="square square-0-1"></div>
+                            <div class="square square-0-2"></div>
+                        </div>
+                        <div class="row row-1">
+                            <div class="square square-1-0"></div>
+                            <div class="square square-1-1"></div>
+                            <div class="square square-1-2"></div>
+                        </div>
+                        <div class="row row-2">
+                            <div class="square square-2-0"></div>
+                            <div class="square square-2-1"></div>
+                            <div class="square square-2-2"></div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </section>
             </section>
-        </section>
+            <section class="config">
+                <h1 class="sr-only">Controls</h1>
+                <button id="undo">Undo Last Move</button>
+                <button id="newGame">New Game</button>
+
+                <h1>Options</h1>
+                <form>
+                    <label for="gameboard-bg-color">Board Grid:</label>
+                    <input type="color" id="gameboard-bg-color" name="boardBgColor">
+                    <label for="gameboard-bg-color">Board Squares:</label>
+                    <input type="color" id="gameboard-fg-color" name="boardFgColor">
+                    <label for="gameboard-bg-color">Player One:</label>
+                    <input type="color" id="player-one-color" name="playerOneColor">
+                    <label for="gameboard-bg-color">Player Two:</label>
+                    <input type="color" id="player-two-color" name="playerTwoColor">
+                </form>
+            </section>
+        </main>
 
         <script>
             document.addEventListener('DOMContentLoaded', function () {
